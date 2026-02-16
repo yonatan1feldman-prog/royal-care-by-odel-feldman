@@ -1,0 +1,29 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+      branches:
+            - claude/beauty-salon-booking-app-rmmNZ
+
+            jobs:
+              deploy:
+                  runs-on: ubuntu-latest
+
+                          steps:
+                                - uses: actions/checkout@v3
+
+                                            - name: Set up Cloud SDK
+                                                    uses: google-github-actions/setup-gcloud@v1
+                                                            with:
+                                                                      service_account_key: ${{ secrets.GCP_SA_KEY }}
+                                                                                project_id: ${{ secrets.GCP_PROJECT_ID }}
+                                                                                          export_default_credentials: true
+
+                                                                                                      - name: Deploy to Cloud Run
+                                                                                                              run: |
+                                                                                                                        gcloud run deploy royal-care-salon \
+                                                                                                                                    --source . \
+                                                                                                                                                --platform managed \
+                                                                                                                                                            --region us-central1 \
+                                                                                                                                                                        --allow-unauthenticated \
+                                                                                                                                                                                    --set-env-vars "NODE_ENV=production"
