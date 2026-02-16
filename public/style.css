@@ -1,0 +1,775 @@
+/* ============ CSS Variables & Reset ============ */
+:root {
+  --primary: #c2185b;
+  --primary-light: #f8bbd0;
+  --primary-dark: #880e4f;
+  --accent: #f06292;
+  --bg: #fce4ec;
+  --bg-card: #ffffff;
+  --text: #333333;
+  --text-light: #777777;
+  --border: #f0e0e5;
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+  --shadow: 0 2px 12px rgba(194, 24, 91, 0.1);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* ============ Header ============ */
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  flex: 1;
+}
+
+.admin-dots-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.admin-dots-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-greeting {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.notif-badge {
+  cursor: pointer;
+  position: relative;
+  font-size: 1rem;
+}
+
+.notif-badge #notifCount {
+  background: var(--warning);
+  border-radius: 50%;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  position: relative;
+  top: -2px;
+}
+
+/* ============ Screens ============ */
+.screen {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ============ Cards ============ */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* ============ Login ============ */
+.login-card {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.salon-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.login-card h2 {
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+/* ============ Forms ============ */
+.form-group {
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* ============ Buttons ============ */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(194, 24, 91, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-small {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+/* ============ Calendar ============ */
+.calendar-container {
+  padding: 16px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.calendar-header h3 {
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.cal-nav {
+  background: var(--primary-light);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.cal-nav:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+  padding: 4px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.95rem;
+  position: relative;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  min-height: 44px;
+}
+
+.cal-day:hover {
+  background: var(--primary-light);
+}
+
+.cal-day.today {
+  border-color: var(--primary);
+  font-weight: 700;
+}
+
+.cal-day.past {
+  color: #ccc;
+  cursor: default;
+}
+
+.cal-day.past:hover {
+  background: none;
+}
+
+.cal-day.empty {
+  cursor: default;
+}
+
+.cal-day.empty:hover {
+  background: none;
+}
+
+.cal-day.has-promo {
+  background: #fff3e0;
+  border-color: var(--warning);
+}
+
+.cal-day.has-promo::after {
+  content: '🏷️';
+  font-size: 0.6rem;
+  position: absolute;
+  bottom: 2px;
+}
+
+.cal-day.has-booking {
+  background: #e8f5e9;
+}
+
+.cal-day.has-booking::after {
+  content: '✓';
+  font-size: 0.6rem;
+  position: absolute;
+  bottom: 2px;
+  color: var(--success);
+  font-weight: bold;
+}
+
+.cal-day .day-number {
+  font-size: 0.9rem;
+}
+
+/* ============ Promotions Legend ============ */
+.promo-legend {
+  padding: 16px 20px;
+}
+
+.promo-legend h4 {
+  color: var(--warning);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.promo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.promo-item:last-child {
+  border-bottom: none;
+}
+
+.promo-date {
+  color: var(--primary);
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.promo-desc {
+  flex: 1;
+  margin: 0 12px;
+}
+
+.promo-delete {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* ============ Treatment Selection ============ */
+.selected-date {
+  text-align: center;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+.promo-on-date {
+  background: linear-gradient(135deg, #fff8e1, #fff3e0);
+  border: 1px solid var(--warning);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.treatments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.treatment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.treatment-card:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.treatment-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.treatment-price {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.treatment-price .original-price {
+  text-decoration: line-through;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-left: 6px;
+}
+
+.treatment-price .discounted {
+  color: var(--success);
+}
+
+.time-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  direction: ltr;
+  text-align: center;
+}
+
+/* ============ Confirmation ============ */
+.confirm-card {
+  text-align: center;
+}
+
+.confirm-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.confirm-card h3 {
+  color: var(--success);
+  margin-bottom: 16px;
+}
+
+#confirmDetails {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+#confirmDetails p {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+/* ============ Bookings List ============ */
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.booking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: #fafafa;
+  border-radius: var(--radius-sm);
+  border-right: 4px solid var(--primary);
+}
+
+.booking-info {
+  flex: 1;
+}
+
+.booking-info .booking-treatment {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.booking-info .booking-date {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.booking-info .booking-client {
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+.booking-status {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.booking-status.pending {
+  background: #fff3e0;
+  color: var(--warning);
+}
+
+.booking-status.confirmed {
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+.booking-status.cancelled {
+  background: #ffebee;
+  color: var(--danger);
+}
+
+.booking-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.booking-actions button {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-light);
+  padding: 20px;
+  font-size: 0.95rem;
+}
+
+/* ============ Modal ============ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  line-height: 1;
+}
+
+/* ============ Admin Tabs ============ */
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 4px;
+  box-shadow: var(--shadow);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ============ Notifications ============ */
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.notif-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notif-item {
+  padding: 10px 14px;
+  background: #fafafa;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  border-right: 3px solid var(--primary);
+}
+
+.notif-item.unread {
+  background: #fff3e0;
+  border-right-color: var(--warning);
+}
+
+.notif-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 400px) {
+  .cal-day {
+    font-size: 0.8rem;
+    min-height: 38px;
+  }
+
+  .calendar-weekdays span {
+    font-size: 0.7rem;
+  }
+
+  .treatment-card {
+    padding: 10px 12px;
+  }
+
+  .admin-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-size: 0.78rem;
+    padding: 8px 6px;
+  }
+}
+
+/* ============ Toast ============ */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  z-index: 999;
+  animation: fadeInUp 0.3s ease;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.success {
+  background: var(--success);
+}
+
+.toast.error {
+  background: var(--danger);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

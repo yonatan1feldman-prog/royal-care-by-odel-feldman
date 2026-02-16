@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Care - קביעת תורים</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <button id="adminDots" class="admin-dots-btn" title="כניסת מנהל">⋮</button>
+        <h1 class="logo">Royal Care</h1>
+        <div class="header-right">
+          <span id="userGreeting" class="user-greeting" style="display:none"></span>
+          <button id="logoutBtn" class="btn-small btn-outline" style="display:none">יציאה</button>
+          <span id="notifBadge" class="notif-badge" style="display:none" title="התראות">🔔 <span id="notifCount">0</span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Login Screen -->
+    <section id="loginScreen" class="screen active">
+      <div class="card login-card">
+        <div class="salon-icon">💅</div>
+        <h2>ברוכות הבאות!</h2>
+        <p class="subtitle">הזיני את הפרטים שלך כדי לקבוע תור</p>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginName">שם מלא</label>
+            <input type="text" id="loginName" placeholder="השם שלך" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPhone">מספר טלפון</label>
+            <input type="tel" id="loginPhone" placeholder="050-0000000" required dir="ltr">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">כניסה</button>
+        </form>
+      </div>
+
+      <!-- Admin Login Modal -->
+      <div id="adminModal" class="modal" style="display:none">
+        <div class="modal-content card">
+          <button class="modal-close" id="closeAdminModal">&times;</button>
+          <h3>כניסת מנהלת</h3>
+          <form id="adminLoginForm">
+            <div class="form-group">
+              <label for="adminName">שם</label>
+              <input type="text" id="adminName" placeholder="שם המנהלת" required>
+            </div>
+            <div class="form-group">
+              <label for="adminPhone">מספר טלפון</label>
+              <input type="tel" id="adminPhone" placeholder="050-0000000" required dir="ltr">
+            </div>
+            <div class="form-group">
+              <label for="adminCode">קוד מנהל</label>
+              <input type="password" id="adminCode" placeholder="הזיני קוד מנהל" required dir="ltr">
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">כניסה כמנהלת</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Calendar Screen -->
+    <section id="calendarScreen" class="screen">
+      <div class="calendar-container card">
+        <div class="calendar-header">
+          <button id="prevMonth" class="cal-nav">&rsaquo;</button>
+          <h3 id="calendarTitle"></h3>
+          <button id="nextMonth" class="cal-nav">&lsaquo;</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </div>
+
+      <!-- Promotions Legend -->
+      <div id="promoLegend" class="promo-legend card" style="display:none">
+        <h4>🎉 מבצעים והנחות</h4>
+        <div id="promoList"></div>
+      </div>
+
+      <!-- My Bookings -->
+      <div class="card">
+        <h4>התורים שלי</h4>
+        <div id="myBookings" class="bookings-list">
+          <p class="empty-state">אין תורים קבועים</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Treatment Selection Modal -->
+    <div id="treatmentModal" class="modal" style="display:none">
+      <div class="modal-content card">
+        <button class="modal-close" id="closeTreatmentModal">&times;</button>
+        <h3>בחירת טיפול</h3>
+        <p id="selectedDateDisplay" class="selected-date"></p>
+        <div id="promoOnDate" class="promo-on-date" style="display:none"></div>
+
+        <div class="form-group">
+          <label>בחירת שעה (אופציונלי)</label>
+          <select id="bookingTime" class="time-select">
+            <option value="">ללא העדפה</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+            <option value="18:30">18:30</option>
+            <option value="19:00">19:00</option>
+            <option value="19:30">19:30</option>
+            <option value="20:00">20:00</option>
+          </select>
+        </div>
+
+        <div id="treatmentsList" class="treatments-list"></div>
+
+        <div class="form-group">
+          <label for="bookingNotes">הערות (אופציונלי)</label>
+          <textarea id="bookingNotes" placeholder="הערות נוספות..." rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="confirmModal" class="modal" style="display:none">
+      <div class="modal-content card confirm-card">
+        <div class="confirm-icon">✅</div>
+        <h3>התור נקבע בהצלחה!</h3>
+        <div id="confirmDetails"></div>
+        <button class="btn btn-primary btn-full" id="confirmOk">סגירה</button>
+      </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <section id="adminScreen" class="screen">
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="adminBookings">תורים</button>
+        <button class="tab-btn" data-tab="adminPromos">מבצעים</button>
+        <button class="tab-btn" data-tab="adminNotifs">התראות</button>
+        <button class="tab-btn" data-tab="adminSettings">הגדרות</button>
+      </div>
+
+      <!-- Admin Bookings Tab -->
+      <div id="adminBookings" class="tab-content active">
+        <div class="card">
+          <h4>כל התורים</h4>
+          <div id="allBookingsList" class="bookings-list admin-bookings">
+            <p class="empty-state">אין תורים</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Promotions Tab -->
+      <div id="adminPromos" class="tab-content">
+        <div class="card">
+          <h4>הוספת מבצע / הנחה</h4>
+          <form id="addPromoForm">
+            <div class="form-group">
+              <label for="promoDate">תאריך</label>
+              <input type="date" id="promoDate" required>
+            </div>
+            <div class="form-group">
+              <label for="promoDesc">תיאור המבצע</label>
+              <input type="text" id="promoDesc" placeholder='לדוג׳: "20% הנחה על פדיקור!"' required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="promoPercent">הנחה באחוזים</label>
+                <input type="number" id="promoPercent" placeholder="%" min="0" max="100">
+              </div>
+              <div class="form-group">
+                <label for="promoAmount">או הנחה בשקלים</label>
+                <input type="number" id="promoAmount" placeholder="₪" min="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="promoTreatment">טיפול ספציפי (אופציונלי)</label>
+              <select id="promoTreatment">
+                <option value="">כל הטיפולים</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">הוסף מבצע</button>
+          </form>
+        </div>
+        <div class="card">
+          <h4>מבצעים פעילים</h4>
+          <div id="activePromosList"></div>
+        </div>
+      </div>
+
+      <!-- Admin Notifications Tab -->
+      <div id="adminNotifs" class="tab-content">
+        <div class="card">
+          <div class="notif-header">
+            <h4>התראות</h4>
+            <button class="btn-small btn-outline" id="markAllRead">סמן הכל כנקרא</button>
+          </div>
+          <div id="notifList" class="notif-list"></div>
+        </div>
+      </div>
+
+      <!-- Admin Settings Tab -->
+      <div id="adminSettings" class="tab-content">
+        <div class="card">
+          <h4>הגדרות מנהל</h4>
+          <form id="settingsForm">
+            <div class="form-group">
+              <label for="settingEmail">אימייל להתראות</label>
+              <input type="email" id="settingEmail" placeholder="your@email.com" dir="ltr">
+            </div>
+            <div class="form-group">
+              <label for="settingAdminCode">קוד מנהל</label>
+              <input type="text" id="settingAdminCode" placeholder="קוד מנהל" dir="ltr">
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">שמור הגדרות</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Calendar for admin too -->
+      <div class="calendar-container card" style="margin-top: 20px;">
+        <div class="calendar-header">
+          <button id="adminPrevMonth" class="cal-nav">&rsaquo;</button>
+          <h3 id="adminCalendarTitle"></h3>
+          <button id="adminNextMonth" class="cal-nav">&lsaquo;</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span>
+        </div>
+        <div id="adminCalendarGrid" class="calendar-grid"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
